@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.spring.mapper.JobLevelMapper">
+
+    <select id="getAllJobLevels" resultType="com.example.spring.model.JobLevel">
+        select *
+        from joblevel
+    </select>
+
+    <select id="getJobLevelByName" parameterType="String">
+        select *
+        from joblevel
+        where name = #{name}
+    </select>
+
+    <insert id="addJobLevel" parameterType="com.example.spring.model.JobLevel">
+        insert into joblevel
+        set name      = #{name},
+            titleLevel=#{titleLevel}
+    </insert>
+
+    <update id="updateJobLevel" parameterType="com.example.spring.model.JobLevel">
+        update joblevel
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="titleLevel != null">
+                titleLevel=#{titleLevel},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteJobLevelById">
+        delete from joblevel where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
