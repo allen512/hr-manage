@@ -20,5 +20,5 @@
 3.axios  
 4.vue-router  
 
-###项目截图
+### 项目截图
 ![screenshot](screenshot/hr1.png)
